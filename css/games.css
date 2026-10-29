@@ -1,0 +1,171 @@
+/* ===================== 遊戲共用 ===================== */
+.game-filters { background: #fff; border: var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 10px 12px 4px; margin-bottom: 16px; }
+.game-filters .filter-row { margin: 0 0 6px; }
+.game-filters .hint { margin: 2px 0 6px; font-size: 12px; }
+.pool-count { font-size: 14px; font-weight: 700; }
+.pool-count b { font-size: 18px; color: var(--pink-deep); }
+.pool-count.zero b { color: var(--red); }
+
+.game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.game-tile {
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px;
+  padding: 14px 8px 12px; background: linear-gradient(180deg, #fff 0%, var(--c) 160%);
+  border: var(--line); border-radius: 20px; box-shadow: var(--shadow); transition: transform .1s;
+}
+.game-tile:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+.game-tile.disabled { opacity: .5; box-shadow: none; border-style: dashed; }
+.game-emoji { font-size: 44px; line-height: 1.1; animation: bob 2.4s ease-in-out infinite; }
+.game-tile:nth-child(2n) .game-emoji { animation-delay: -1.2s; }
+.game-name { font-family: var(--font-jp); font-size: 15px; color: var(--pink-deep); -webkit-text-stroke: .3px var(--ink); }
+.game-tile b { font-size: 15px; }
+.game-tile small { font-size: 11px; color: var(--ink-soft); line-height: 1.3; }
+
+.game-header {
+  position: relative; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin: -14px -14px 14px; padding: 12px 14px; background: linear-gradient(180deg, var(--c), var(--cream)); border-bottom: 2px dashed #E6D5BC;
+}
+.game-header .back-btn { position: static; flex: none; }
+.game-title { font-family: var(--font-jp); font-size: 22px; text-align: center; line-height: 1.1; -webkit-text-stroke: .3px var(--ink); }
+.game-title small { display: block; font-family: var(--font); font-size: 12px; color: var(--ink-soft); -webkit-text-stroke: 0; }
+.game-filters-wrap[hidden] { display: none; }
+.game-stage { min-height: 50vh; }
+.btn-big { min-height: 56px; font-size: 19px; padding: 10px 28px; }
+.center-row { justify-content: center; }
+
+.result-dialog .shop-card { margin: 0; text-align: left; box-shadow: 0 3px 0 var(--ink); }
+.result-dialog .dialog-actions .btn { padding: 8px 6px; font-size: 14px; }
+.result-note { margin: 10px 0 0; font-weight: 700; color: var(--pink-deep); }
+
+/* ===================== 🎡 輪盤 ===================== */
+.roulette { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.stage-label { display: flex; gap: 8px; }
+.step { padding: 2px 14px; border: 2.5px solid var(--ink); border-radius: 999px; font-weight: 800; background: #fff; color: var(--ink-soft); font-size: 14px; }
+.step.on { background: var(--pink); color: #fff; }
+.step.done { background: var(--mint); color: var(--ink); }
+.wheel-wrap { position: relative; width: min(86vw, 330px); aspect-ratio: 1; }
+.wheel-rotor { width: 100%; height: 100%; will-change: transform; filter: drop-shadow(0 6px 0 rgba(59, 47, 74, .35)); }
+.wheel-svg { width: 100%; height: 100%; display: block; }
+.wheel-pointer {
+  position: absolute; z-index: 2; top: -16px; left: 50%; transform: translateX(-50%);
+  font-size: 34px; color: var(--pink-deep); -webkit-text-stroke: 2px var(--ink); line-height: 1;
+}
+.cat-quick { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.cat-quick .chip { background: var(--c); }
+
+/* ===================== 🎰 扭蛋 ===================== */
+.gacha { display: flex; flex-direction: column; align-items: center; }
+.gacha-machine { width: 230px; position: relative; }
+.gacha-machine.shaking { animation: machine-shake .13s linear infinite; }
+@keyframes machine-shake { 25% { transform: rotate(-2deg) translateX(-2px); } 75% { transform: rotate(2deg) translateX(2px); } }
+.gacha-dome {
+  position: relative; height: 170px; margin: 0 14px; overflow: hidden;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .95), rgba(220, 240, 255, .7) 60%);
+  border: var(--line); border-bottom: 0; border-radius: 100px 100px 10px 10px;
+}
+.dome-shine { position: absolute; top: 18px; left: 26px; width: 22px; height: 60px; border-radius: 20px; background: rgba(255, 255, 255, .8); transform: rotate(20deg); }
+.ball {
+  position: absolute; width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--ink);
+  background: linear-gradient(180deg, var(--b) 50%, #fff 50%); transform: rotate(var(--rot, 0deg));
+}
+.shaking .ball { animation: ball-jump .3s var(--d) ease-in-out infinite alternate; }
+@keyframes ball-jump { to { transform: translateY(-14px) rotate(calc(var(--rot, 0deg) + 60deg)); } }
+.gacha-body {
+  position: relative; height: 150px; background: linear-gradient(180deg, #FF8FB1, #F2648F);
+  border: var(--line); border-radius: 16px 16px 24px 24px; box-shadow: var(--shadow);
+}
+.gacha-sign {
+  position: absolute; top: 12px; left: 12px; font-family: var(--font-jp); font-size: 13px; line-height: 1.1;
+  color: #fff; background: var(--ink); padding: 4px 8px; border-radius: 8px;
+}
+.gacha-knob {
+  position: absolute; top: 22px; right: 22px; width: 76px; height: 76px; border-radius: 50%;
+  background: radial-gradient(circle, #FFE066 45%, #FFB800); border: var(--line); box-shadow: 0 4px 0 var(--ink);
+  font-family: var(--font-jp); font-size: 17px; color: var(--ink); cursor: pointer;
+}
+.gacha-knob span { position: relative; z-index: 1; display: inline-block; text-shadow: 0 0 4px #FFE066, 0 0 4px #FFE066; }
+.gacha-knob::before { content: ''; position: absolute; left: 50%; top: 6px; bottom: 6px; width: 8px; transform: translateX(-50%); background: rgba(255, 255, 255, .45); border-radius: 6px; }
+.gacha-knob:disabled { cursor: default; }
+.gacha-knob.turning { animation: knob-turn 1.2s cubic-bezier(.4, 0, .2, 1); }
+@keyframes knob-turn { to { transform: rotate(720deg); } }
+.gacha-knob:not(:disabled) { animation: knob-pulse 1.6s ease-in-out infinite; }
+@keyframes knob-pulse { 50% { transform: scale(1.06); } }
+.gacha-slot { position: absolute; left: 20px; bottom: 18px; width: 70px; height: 42px; background: #3B2F4A; border-radius: 10px; border: 3px solid #fff; }
+.capsule-zone { height: 120px; display: grid; place-items: center; }
+.capsule {
+  position: relative; width: 84px; height: 84px; padding: 0; border: 0; background: none; cursor: pointer;
+  animation: cap-drop .7s cubic-bezier(.3, 1.6, .5, 1), cap-wiggle 1.2s .8s ease-in-out infinite;
+}
+@keyframes cap-drop { from { transform: translateY(-90px) scale(.6); opacity: 0; } }
+@keyframes cap-wiggle { 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+.cap-top, .cap-bottom { position: absolute; left: 0; width: 84px; height: 42px; border: 3px solid var(--ink); transition: transform .5s cubic-bezier(.3, 1.5, .5, 1), opacity .5s; }
+.cap-top { top: 0; border-radius: 42px 42px 0 0; background: var(--r); }
+.cap-bottom { bottom: 0; border-radius: 0 0 42px 42px; background: #fff; }
+.r-SSR .cap-top { background: linear-gradient(90deg, #FFE066, #FF8FB1, #7CCBFF, #7EE0B5, #FFE066); background-size: 300% 100%; animation: shimmer 1.5s linear infinite; }
+.cap-glow { position: absolute; inset: -18px; border-radius: 50%; background: radial-gradient(circle, var(--r) 0%, transparent 70%); opacity: .6; z-index: -1; animation: pulse 1s infinite; }
+.capsule.open { animation: none; }
+.capsule.open .cap-top { transform: translateY(-50px) rotate(-25deg); opacity: 0; }
+.capsule.open .cap-bottom { transform: translateY(30px) rotate(15deg); opacity: 0; }
+.gacha-hint { font-weight: 800; margin: 0 0 14px; min-height: 1.5em; text-align: center; }
+.gacha-flash { position: fixed; inset: 0; z-index: 95; background: #fff; pointer-events: none; animation: flash 1.2s ease-out forwards; }
+.gacha-flash.rainbow { background: radial-gradient(circle, #fff 10%, #FFE066 35%, #FF8FB1 60%, #7CCBFF 85%); }
+@keyframes flash { 0% { opacity: 0; } 15% { opacity: .95; } 100% { opacity: 0; } }
+.rarity-table { width: 100%; background: #fff; border: var(--line); border-radius: var(--radius); padding: 10px 14px; box-shadow: var(--shadow); }
+.rarity-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+.rarity-row + .rarity-row { border-top: 1.5px dashed #EADBC4; }
+.rarity-row > span:nth-child(2) { flex: 1; font-weight: 700; }
+.rarity-row small { display: block; font-weight: 500; color: var(--ink-soft); font-size: 12px; }
+.rarity-badge {
+  min-width: 46px; text-align: center; font-family: var(--font-jp); font-size: 15px; padding: 1px 6px;
+  color: #fff; background: var(--r); border: 2.5px solid var(--ink); border-radius: 8px; -webkit-text-stroke: .4px var(--ink);
+}
+.r-SSR .rarity-badge, .rarity-banner.r-SSR { background: linear-gradient(90deg, #FFB800, #FF8FB1, #7CCBFF, #FFB800); background-size: 300% 100%; animation: shimmer 2s linear infinite; }
+.rarity-banner {
+  display: flex; flex-direction: column; align-items: center; margin-bottom: 12px; padding: 6px; color: #fff;
+  background: var(--r); border: var(--line); border-radius: 14px; -webkit-text-stroke: .4px var(--ink);
+}
+.rarity-banner b { font-family: var(--font-jp); font-size: 36px; line-height: 1; text-shadow: 0 3px 0 var(--ink); }
+.rarity-banner span { font-size: 13px; font-weight: 700; -webkit-text-stroke: 0; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .5); }
+
+/* ===================== ⚔️ 淘汰賽 ===================== */
+.tournament { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.tour-intro { text-align: center; }
+.tour-intro p { margin: 4px 0 0; }
+.size-pick { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.tour-round { display: flex; flex-direction: column; align-items: center; }
+.tour-round b { font-family: var(--font-jp); font-size: 26px; color: var(--pink-deep); -webkit-text-stroke: .5px var(--ink); }
+.tour-round span { font-size: 13px; color: var(--ink-soft); font-weight: 700; }
+.vs-stage { position: relative; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.vs-card {
+  display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 14px 6px; min-width: 0;
+  background: linear-gradient(180deg, #fff 30%, var(--c) 180%); border: var(--line); border-radius: 18px; box-shadow: var(--shadow);
+  transition: transform .25s, opacity .25s, filter .25s;
+}
+.vs-card.left { animation: slide-l .45s cubic-bezier(.3, 1.4, .5, 1); }
+.vs-card.right { animation: slide-r .45s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes slide-l { from { transform: translateX(-60%); opacity: 0; } }
+@keyframes slide-r { from { transform: translateX(60%); opacity: 0; } }
+.vs-card:active { transform: translateY(3px); }
+.vs-card.winner { transform: scale(1.06); box-shadow: 0 0 0 4px var(--lemon), var(--shadow); }
+.vs-card.loser { opacity: .35; filter: grayscale(1); transform: scale(.92) rotate(-4deg); }
+.vs-icon { font-size: 40px; line-height: 1.2; }
+.vs-name { font-size: 16px; line-height: 1.25; text-align: center; overflow-wrap: anywhere; }
+.vs-meta { font-size: 12px; }
+.vs-badge {
+  position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-8deg);
+  font-family: var(--font-jp); font-size: 30px; color: var(--lemon); -webkit-text-stroke: 2px var(--ink);
+  text-shadow: 0 4px 0 var(--ink); animation: vs-pop .5s .2s cubic-bezier(.3, 1.8, .5, 1) both;
+}
+@keyframes vs-pop { from { transform: translate(-50%, -50%) scale(3) rotate(-8deg); opacity: 0; } }
+.tour-bracket { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.tour-bracket span { font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 2px solid #D9C7AE; background: #fff; color: var(--ink-soft); }
+.tour-bracket .now { border-color: var(--ink); color: var(--ink); font-weight: 800; background: var(--lemon); }
+.tour-bracket .win { border-color: #1F9D63; color: #1F9D63; }
+.tour-bracket .lose { text-decoration: line-through; opacity: .5; }
+.champion { position: relative; padding-top: 10px; overflow: hidden; }
+.crown { font-size: 54px; line-height: 1; animation: bob 1.6s ease-in-out infinite; }
+.champ-icon { width: 110px; height: 110px; display: grid; place-items: center; font-size: 62px; background: var(--c); border: var(--line); border-radius: 50%; box-shadow: var(--shadow); }
+.champ-title { font-family: var(--font-jp); font-size: 40px; color: var(--lemon); -webkit-text-stroke: 1.5px var(--ink); text-shadow: 0 4px 0 var(--ink); }
+.champ-name { font-size: 22px; font-weight: 800; text-align: center; }
+.confetti { position: absolute; inset: 0; pointer-events: none; }
+.confetti i { position: absolute; top: -20px; left: var(--x); width: 10px; height: 14px; background: var(--c); border: 1.5px solid var(--ink); animation: confetti 2.4s var(--d) linear infinite; }
+@keyframes confetti { to { transform: translateY(460px) rotate(720deg); } }

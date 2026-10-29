@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FF8FB1">
+  <title>今日のごはんガチャ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="css/base.css?v=0.9.0">
+  <link rel="stylesheet" href="css/layout.css?v=0.9.0">
+  <link rel="stylesheet" href="css/games.css?v=0.9.0">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar"></header>
+    <main id="view"></main>
+    <nav id="tabbar">
+      <a href="#/games" data-tab="games"><b>🎮</b><span>遊戲</span></a>
+      <a href="#/map" data-tab="map"><b>🗺️</b><span>地圖</span></a>
+      <a href="#/pick" data-tab="pick" class="tab-main"><b>🍱</b><span>選店</span></a>
+      <a href="#/records" data-tab="records"><b>🏆</b><span>紀錄</span></a>
+      <a href="#/settings" data-tab="settings"><b>⚙️</b><span>設定</span></a>
+    </nav>
+  </div>
+  <div id="overlay-root"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="js/firebase-config.js?v=0.9.0"></script>
+  <script src="js/config.js?v=0.9.0"></script>
+  <script src="js/utils.js?v=0.9.0"></script>
+  <script src="js/hours.js?v=0.9.0"></script>
+  <script src="js/data.js?v=0.9.0"></script>
+  <script src="js/player.js?v=0.9.0"></script>
+  <script src="js/avatars.js?v=0.9.0"></script>
+  <script src="js/photos.js?v=0.9.0"></script>
+  <script src="js/store.js?v=0.9.0"></script>
+  <script src="js/cloud.js?v=0.9.0"></script>
+  <script src="js/ui.js?v=0.9.0"></script>
+  <script src="js/components.js?v=0.9.0"></script>
+  <script src="js/geo.js?v=0.9.0"></script>
+  <script src="js/menuOcr.js?v=0.9.0"></script>
+  <script src="js/menuItems.js?v=0.9.0"></script>
+  <script src="js/orders.js?v=0.9.0"></script>
+  <script src="js/pages/pick.js?v=0.9.0"></script>
+  <script src="js/pages/shopDetail.js?v=0.9.0"></script>
+  <script src="js/pages/shopForm.js?v=0.9.0"></script>
+  <script src="js/pages/map.js?v=0.9.0"></script>
+  <script src="js/pages/records.js?v=0.9.0"></script>
+  <script src="js/pages/settings.js?v=0.9.0"></script>
+  <script src="js/games/picker.js?v=0.9.0"></script>
+  <script src="js/games/games.js?v=0.9.0"></script>
+  <script src="js/games/roulette.js?v=0.9.0"></script>
+  <script src="js/games/gacha.js?v=0.9.0"></script>
+  <script src="js/games/tournament.js?v=0.9.0"></script>
+  <script src="js/app.js?v=0.9.0"></script>
+</body>
+</html>
